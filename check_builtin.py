@@ -5,458 +5,6 @@ import os
 import argparse
 
 VSCODE_BUILTINS = {
-    "2022": {
-        # ARM64-specific intrinsics listing
-        "__break": {"proto": "void __break(int);", "call": "__break(0);"},
-        "__addx18byte": {
-            "proto": "void __addx18byte(unsigned long, unsigned char);",
-            "call": "__addx18byte(0, 0);",
-        },
-        "__addx18word": {
-            "proto": "void __addx18word(unsigned long, unsigned short);",
-            "call": "__addx18word(0, 0);",
-        },
-        "__addx18dword": {
-            "proto": "void __addx18dword(unsigned long, unsigned long);",
-            "call": "__addx18dword(0, 0);",
-        },
-        "__addx18qword": {
-            "proto": "void __addx18qword(unsigned long, unsigned __int64);",
-            "call": "__addx18qword(0, 0);",
-        },
-        # CAS (Compare and Swap)
-        "__cas8": {
-            "proto": "unsigned __int8 __cas8(unsigned __int8 volatile*, unsigned __int8, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __cas8(&tgt, 0, 0);",
-        },
-        "__cas16": {
-            "proto": "unsigned __int16 __cas16(unsigned __int16 volatile*, unsigned __int16, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __cas16(&tgt, 0, 0);",
-        },
-        "__cas32": {
-            "proto": "unsigned __int32 __cas32(unsigned __int32 volatile*, unsigned __int32, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __cas32(&tgt, 0, 0);",
-        },
-        "__cas64": {
-            "proto": "unsigned __int64 __cas64(unsigned __int64 volatile*, unsigned __int64, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __cas64(&tgt, 0, 0);",
-        },
-        "__casa8": {
-            "proto": "unsigned __int8 __casa8(unsigned __int8 volatile*, unsigned __int8, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __casa8(&tgt, 0, 0);",
-        },
-        "__casa16": {
-            "proto": "unsigned __int16 __casa16(unsigned __int16 volatile*, unsigned __int16, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __casa16(&tgt, 0, 0);",
-        },
-        "__casa32": {
-            "proto": "unsigned __int32 __casa32(unsigned __int32 volatile*, unsigned __int32, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __casa32(&tgt, 0, 0);",
-        },
-        "__casa64": {
-            "proto": "unsigned __int64 __casa64(unsigned __int64 volatile*, unsigned __int64, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __casa64(&tgt, 0, 0);",
-        },
-        "__casl8": {
-            "proto": "unsigned __int8 __casl8(unsigned __int8 volatile*, unsigned __int8, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __casl8(&tgt, 0, 0);",
-        },
-        "__casl16": {
-            "proto": "unsigned __int16 __casl16(unsigned __int16 volatile*, unsigned __int16, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __casl16(&tgt, 0, 0);",
-        },
-        "__casl32": {
-            "proto": "unsigned __int32 __casl32(unsigned __int32 volatile*, unsigned __int32, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __casl32(&tgt, 0, 0);",
-        },
-        "__casl64": {
-            "proto": "unsigned __int64 __casl64(unsigned __int64 volatile*, unsigned __int64, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __casl64(&tgt, 0, 0);",
-        },
-        "__casal8": {
-            "proto": "unsigned __int8 __casal8(unsigned __int8 volatile*, unsigned __int8, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __casal8(&tgt, 0, 0);",
-        },
-        "__casal16": {
-            "proto": "unsigned __int16 __casal16(unsigned __int16 volatile*, unsigned __int16, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __casal16(&tgt, 0, 0);",
-        },
-        "__casal32": {
-            "proto": "unsigned __int32 __casal32(unsigned __int32 volatile*, unsigned __int32, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __casal32(&tgt, 0, 0);",
-        },
-        "__casal64": {
-            "proto": "unsigned __int64 __casal64(unsigned __int64 volatile*, unsigned __int64, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __casal64(&tgt, 0, 0);",
-        },
-        # CRC32
-        "__crc32b": {
-            "proto": "unsigned __int32 __crc32b(unsigned __int32, unsigned __int32);",
-            "call": "__crc32b(0, 0);",
-        },
-        "__crc32h": {
-            "proto": "unsigned __int32 __crc32h(unsigned __int32, unsigned __int32);",
-            "call": "__crc32h(0, 0);",
-        },
-        "__crc32w": {
-            "proto": "unsigned __int32 __crc32w(unsigned __int32, unsigned __int32);",
-            "call": "__crc32w(0, 0);",
-        },
-        "__crc32d": {
-            "proto": "unsigned __int32 __crc32d(unsigned __int32, unsigned __int64);",
-            "call": "__crc32d(0, 0);",
-        },
-        "__crc32cb": {
-            "proto": "unsigned __int32 __crc32cb(unsigned __int32, unsigned __int32);",
-            "call": "__crc32cb(0, 0);",
-        },
-        "__crc32ch": {
-            "proto": "unsigned __int32 __crc32ch(unsigned __int32, unsigned __int32);",
-            "call": "__crc32ch(0, 0);",
-        },
-        "__crc32cw": {
-            "proto": "unsigned __int32 __crc32cw(unsigned __int32, unsigned __int32);",
-            "call": "__crc32cw(0, 0);",
-        },
-        "__crc32cd": {
-            "proto": "unsigned __int32 __crc32cd(unsigned __int32, unsigned __int64);",
-            "call": "__crc32cd(0, 0);",
-        },
-        # Barriers and Hints
-        "__dmb": {"proto": "void __dmb(unsigned int);", "call": "__dmb(0);"},
-        "__dsb": {"proto": "void __dsb(unsigned int);", "call": "__dsb(0);"},
-        "__isb": {"proto": "void __isb(unsigned int);", "call": "__isb(0);"},
-        # Registers and Execution States
-        "__getReg": {
-            "proto": "unsigned __int64 __getReg(int);",
-            "call": "__getReg(0);",
-        },
-        "__getRegFp": {"proto": "double __getRegFp(int);", "call": "__getRegFp(0);"},
-        "__getCallerReg": {
-            "proto": "unsigned __int64 __getCallerReg(int);",
-            "call": "__getCallerReg(0);",
-        },
-        "__getCallerRegFp": {
-            "proto": "double __getCallerRegFp(int);",
-            "call": "__getCallerRegFp(0);",
-        },
-        "__hvc": {
-            "proto": "unsigned int __hvc(unsigned int, ...);",
-            "call": "__hvc(0);",
-        },
-        "__hlt": {"proto": "int __hlt(unsigned int, ...);", "call": "__hlt(0);"},
-        # x18 Manipulation
-        "__incx18byte": {
-            "proto": "void __incx18byte(unsigned long);",
-            "call": "__incx18byte(0);",
-        },
-        "__incx18word": {
-            "proto": "void __incx18word(unsigned long);",
-            "call": "__incx18word(0);",
-        },
-        "__incx18dword": {
-            "proto": "void __incx18dword(unsigned long);",
-            "call": "__incx18dword(0);",
-        },
-        "__incx18qword": {
-            "proto": "void __incx18qword(unsigned long);",
-            "call": "__incx18qword(0);",
-        },
-        # ISO Volatile
-        "__iso_volatile_load8": {
-            "proto": "__int8 __iso_volatile_load8(const volatile __int8 *);",
-            "call": "__int8 tgt = 0; __iso_volatile_load8(&tgt);",
-        },
-        "__iso_volatile_load16": {
-            "proto": "__int16 __iso_volatile_load16(const volatile __int16 *);",
-            "call": "__int16 tgt = 0; __iso_volatile_load16(&tgt);",
-        },
-        "__iso_volatile_load32": {
-            "proto": "__int32 __iso_volatile_load32(const volatile __int32 *);",
-            "call": "__int32 tgt = 0; __iso_volatile_load32(&tgt);",
-        },
-        "__iso_volatile_load64": {
-            "proto": "__int64 __iso_volatile_load64(const volatile __int64 *);",
-            "call": "__int64 tgt = 0; __iso_volatile_load64(&tgt);",
-        },
-        "__iso_volatile_store8": {
-            "proto": "void __iso_volatile_store8(volatile __int8 *, __int8);",
-            "call": "__int8 tgt = 0; __iso_volatile_store8(&tgt, 0);",
-        },
-        "__iso_volatile_store16": {
-            "proto": "void __iso_volatile_store16(volatile __int16 *, __int16);",
-            "call": "__int16 tgt = 0; __iso_volatile_store16(&tgt, 0);",
-        },
-        "__iso_volatile_store32": {
-            "proto": "void __iso_volatile_store32(volatile __int32 *, __int32);",
-            "call": "__int32 tgt = 0; __iso_volatile_store32(&tgt, 0);",
-        },
-        "__iso_volatile_store64": {
-            "proto": "void __iso_volatile_store64(volatile __int64 *, __int64);",
-            "call": "__int64 tgt = 0; __iso_volatile_store64(&tgt, 0);",
-        },
-        # LDAR / LDAPR
-        "__ldar8": {
-            "proto": "unsigned __int8 __ldar8(const unsigned __int8 volatile*);",
-            "call": "unsigned __int8 tgt = 0; __ldar8(&tgt);",
-        },
-        "__ldar16": {
-            "proto": "unsigned __int16 __ldar16(const unsigned __int16 volatile*);",
-            "call": "unsigned __int16 tgt = 0; __ldar16(&tgt);",
-        },
-        "__ldar32": {
-            "proto": "unsigned __int32 __ldar32(const nsigned __int32 volatile*);",
-            "call": "unsigned __int32 tgt = 0; __ldar32(&tgt);",
-        },
-        "__ldar64": {
-            "proto": "unsigned __int64 __ldar64(const unsigned __int64 volatile*);",
-            "call": "unsigned __int64 tgt = 0; __ldar64(&tgt);",
-        },
-        "__ldapr8": {
-            "proto": "unsigned __int8 __ldapr8(const unsigned __int8 volatile*);",
-            "call": "unsigned __int8 tgt = 0; __ldapr8(&tgt);",
-        },
-        "__ldapr16": {
-            "proto": "unsigned __int16 __ldapr16(const unsigned __int16 volatile*);",
-            "call": "unsigned __int16 tgt = 0; __ldapr16(&tgt);",
-        },
-        "__ldapr32": {
-            "proto": "unsigned __int32 __ldapr32(const unsigned __int32 volatile*);",
-            "call": "unsigned __int32 tgt = 0; __ldapr32(&tgt);",
-        },
-        "__ldapr64": {
-            "proto": "unsigned __int64 __ldapr64(const unsigned __int64 volatile*);",
-            "call": "unsigned __int64 tgt = 0; __ldapr64(&tgt);",
-        },
-        # Math & Prefetch
-        "__mulh": {
-            "proto": "__int64 __mulh(__int64, __int64);",
-            "call": "__mulh(0, 0);",
-        },
-        "__umulh": {
-            "proto": "unsigned __int64 __umulh(unsigned __int64, unsigned __int64);",
-            "call": "__umulh(0, 0);",
-        },
-        "__prefetch": {
-            "proto": "void __cdecl __prefetch(const void *);",
-            "call": "int dummy = 0; __prefetch(&dummy);",
-        },
-        "__prefetch2": {
-            "proto": "void __cdecl __prefetch(const void *, uint8_t);",
-            "call": "int dummy = 0; __prefetch(&dummy, 0);",
-        },
-        # More x18 Accessors
-        "__readx18byte": {
-            "proto": "unsigned char __readx18byte(unsigned long);",
-            "call": "__readx18byte(0);",
-        },
-        "__readx18word": {
-            "proto": "unsigned short __readx18word(unsigned long);",
-            "call": "__readx18word(0);",
-        },
-        "__readx18dword": {
-            "proto": "unsigned long __readx18dword(unsigned long);",
-            "call": "__readx18dword(0);",
-        },
-        "__readx18qword": {
-            "proto": "unsigned __int64 __readx18qword(unsigned long);",
-            "call": "__readx18qword(0);",
-        },
-        "__writex18byte": {
-            "proto": "void __writex18byte(unsigned long, unsigned char);",
-            "call": "__writex18byte(0, 0);",
-        },
-        "__writex18word": {
-            "proto": "void __writex18word(unsigned long, unsigned short);",
-            "call": "__writex18word(0, 0);",
-        },
-        "__writex18dword": {
-            "proto": "void __writex18dword(unsigned long, unsigned long);",
-            "call": "__writex18dword(0, 0);",
-        },
-        "__writex18qword": {
-            "proto": "void __writex18qword(unsigned long, unsigned __int64);",
-            "call": "__writex18qword(0, 0);",
-        },
-        # Setters and Execution State
-        "__setReg": {
-            "proto": "void __setReg(int, unsigned __int64);",
-            "call": "__setReg(0, 0);",
-        },
-        "__setRegFp": {
-            "proto": "void __setRegFp(int, double);",
-            "call": "__setRegFp(0, 0.0);",
-        },
-        "__setCallerReg": {
-            "proto": "void __setCallerReg(int, unsigned __int64);",
-            "call": "__setCallerReg(0, 0);",
-        },
-        "__setCallerRegFp": {
-            "proto": "void __setCallerRegFp(int, double);",
-            "call": "__setCallerRegFp(0, 0.0);",
-        },
-        "__sev": {"proto": "void __sev(void);", "call": "__sev();"},
-        "__wfe": {"proto": "void __wfe(void);", "call": "__wfe();"},
-        "__wfi": {"proto": "void __wfi(void);", "call": "__wfi();"},
-        "__svc": {
-            "proto": "unsigned int __svc(unsigned int, ...);",
-            "call": "__svc(0);",
-        },
-        "__sys": {"proto": "unsigned int __sys(int, __int64);", "call": "__sys(0, 0);"},
-        "__static_assert": {
-            "proto": "void __static_assert(int, const char *);",
-            "call": '__static_assert(1, "test");',
-        },
-        # STLR
-        "__stlr8": {
-            "proto": "void __stlr8(unsigned __int8 volatile*, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __stlr8(&tgt, 0);",
-        },
-        "__stlr16": {
-            "proto": "void __stlr16(unsigned __int16 volatile*, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __stlr16(&tgt, 0);",
-        },
-        "__stlr32": {
-            "proto": "void __stlr32(unsigned __int32 volatile*, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __stlr32(&tgt, 0);",
-        },
-        "__stlr64": {
-            "proto": "void __stlr64(unsigned __int64 volatile*, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __stlr64(&tgt, 0);",
-        },
-        # SWP
-        "__swp8": {
-            "proto": "unsigned __int8 __swp8(unsigned __int8 volatile*, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __swp8(&tgt, 0);",
-        },
-        "__swp16": {
-            "proto": "unsigned __int16 __swp16(unsigned __int16 volatile*, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __swp16(&tgt, 0);",
-        },
-        "__swp32": {
-            "proto": "unsigned __int32 __swp32(unsigned __int32 volatile*, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __swp32(&tgt, 0);",
-        },
-        "__swp64": {
-            "proto": "unsigned __int64 __swp64(unsigned __int64 volatile*, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __swp64(&tgt, 0);",
-        },
-        "__swpa8": {
-            "proto": "unsigned __int8 __swpa8(unsigned __int8 volatile*, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __swpa8(&tgt, 0);",
-        },
-        "__swpa16": {
-            "proto": "unsigned __int16 __swpa16(unsigned __int16 volatile*, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __swpa16(&tgt, 0);",
-        },
-        "__swpa32": {
-            "proto": "unsigned __int32 __swpa32(unsigned __int32 volatile*, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __swpa32(&tgt, 0);",
-        },
-        "__swpa64": {
-            "proto": "unsigned __int64 __swpa64(unsigned __int64 volatile*, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __swpa64(&tgt, 0);",
-        },
-        "__swpl8": {
-            "proto": "unsigned __int8 __swpl8(unsigned __int8 volatile*, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __swpl8(&tgt, 0);",
-        },
-        "__swpl16": {
-            "proto": "unsigned __int16 __swpl16(unsigned __int16 volatile*, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __swpl16(&tgt, 0);",
-        },
-        "__swpl32": {
-            "proto": "unsigned __int32 __swpl32(unsigned __int32 volatile*, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __swpl32(&tgt, 0);",
-        },
-        "__swpl64": {
-            "proto": "unsigned __int64 __swpl64(unsigned __int64 volatile*, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __swpl64(&tgt, 0);",
-        },
-        "__swpal8": {
-            "proto": "unsigned __int8 __swpal8(unsigned __int8 volatile*, unsigned __int8);",
-            "call": "unsigned __int8 tgt = 0; __swpal8(&tgt, 0);",
-        },
-        "__swpal16": {
-            "proto": "unsigned __int16 __swpal16(unsigned __int16 volatile*, unsigned __int16);",
-            "call": "unsigned __int16 tgt = 0; __swpal16(&tgt, 0);",
-        },
-        "__swpal32": {
-            "proto": "unsigned __int32 __swpal32(unsigned __int32 volatile*, unsigned __int32);",
-            "call": "unsigned __int32 tgt = 0; __swpal32(&tgt, 0);",
-        },
-        "__swpal64": {
-            "proto": "unsigned __int64 __swpal64(unsigned __int64 volatile*, unsigned __int64);",
-            "call": "unsigned __int64 tgt = 0; __swpal64(&tgt, 0);",
-        },
-        # Type Casting and Utility
-        "_CopyDoubleFromInt64": {
-            "proto": "double _CopyDoubleFromInt64(__int64);",
-            "call": "_CopyDoubleFromInt64(0);",
-        },
-        "_CopyFloatFromInt32": {
-            "proto": "float _CopyFloatFromInt32(__int32);",
-            "call": "_CopyFloatFromInt32(0);",
-        },
-        "_CopyInt32FromFloat": {
-            "proto": "__int32 _CopyInt32FromFloat(float);",
-            "call": "_CopyInt32FromFloat(0.0f);",
-        },
-        "_CopyInt64FromDouble": {
-            "proto": "__int64 _CopyInt64FromDouble(double);",
-            "call": "_CopyInt64FromDouble(0.0);",
-        },
-        # Counting Bits
-        "_CountLeadingOnes": {
-            "proto": "unsigned int _CountLeadingOnes(unsigned long);",
-            "call": "_CountLeadingOnes(0);",
-        },
-        "_CountLeadingOnes64": {
-            "proto": "unsigned int _CountLeadingOnes64(unsigned __int64);",
-            "call": "_CountLeadingOnes64(0);",
-        },
-        "_CountLeadingSigns": {
-            "proto": "unsigned int _CountLeadingSigns(long);",
-            "call": "_CountLeadingSigns(0);",
-        },
-        "_CountLeadingSigns64": {
-            "proto": "unsigned int _CountLeadingSigns64(__int64);",
-            "call": "_CountLeadingSigns64(0);",
-        },
-        "_CountLeadingZeros": {
-            "proto": "unsigned int _CountLeadingZeros(unsigned long);",
-            "call": "_CountLeadingZeros(0);",
-        },
-        "_CountLeadingZeros64": {
-            "proto": "unsigned int _CountLeadingZeros64(unsigned __int64);",
-            "call": "_CountLeadingZeros64(0);",
-        },
-        "_CountTrailingZeros": {
-            "proto": "unsigned int _CountTrailingZeros(unsigned long);",
-            "call": "_CountTrailingZeros(0);",
-        },
-        "_CountTrailingZeros64": {
-            "proto": "unsigned int _CountTrailingZeros64(unsigned __int64);",
-            "call": "_CountTrailingZeros64(0);",
-        },
-        "_CountOneBits": {
-            "proto": "unsigned int _CountOneBits(unsigned long);",
-            "call": "_CountOneBits(0);",
-        },
-        "_CountOneBits64": {
-            "proto": "unsigned int _CountOneBits64(unsigned __int64);",
-            "call": "_CountOneBits64(0);",
-        },
-        # Status Registers
-        "_ReadStatusReg": {
-            "proto": "__int64 _ReadStatusReg(int);",
-            "call": "_ReadStatusReg(0);",
-        },
-        "_WriteStatusReg": {
-            "proto": "void _WriteStatusReg(int, __int64);",
-            "call": "_WriteStatusReg(0, 0);",
-        },
-    },
     # ARM64-specific intrinsics listing
     "2026": {
         "__break": {"proto": "void __break(int);", "call": "__break(0);"},
@@ -476,7 +24,6 @@ VSCODE_BUILTINS = {
             "proto": "void __addx18qword(unsigned long, unsigned __int64);",
             "call": "__addx18qword(0, 0);",
         },
-        # CAS (Compare and Swap)
         "__cas8": {
             "proto": "unsigned __int8 __cas8(unsigned __int8 volatile*, unsigned __int8, unsigned __int8);",
             "call": "unsigned __int8 tgt = 0; __cas8(&tgt, 0, 0);",
@@ -541,7 +88,6 @@ VSCODE_BUILTINS = {
             "proto": "unsigned __int64 __casal64(unsigned __int64 volatile*, unsigned __int64, unsigned __int64);",
             "call": "unsigned __int64 tgt = 0; __casal64(&tgt, 0, 0);",
         },
-        # CRC32
         "__crc32b": {
             "proto": "unsigned __int32 __crc32b(unsigned __int32, unsigned __int32);",
             "call": "__crc32b(0, 0);",
@@ -574,30 +120,30 @@ VSCODE_BUILTINS = {
             "proto": "unsigned __int32 __crc32cd(unsigned __int32, unsigned __int64);",
             "call": "__crc32cd(0, 0);",
         },
-        # Barriers and Hints
         "__dmb": {"proto": "void __dmb(unsigned int);", "call": "__dmb(0);"},
         "__dsb": {"proto": "void __dsb(unsigned int);", "call": "__dsb(0);"},
         "__isb": {"proto": "void __isb(unsigned int);", "call": "__isb(0);"},
-        # Registers and Execution States
         "__getReg": {
             "proto": "unsigned __int64 __getReg(int);",
             "call": "__getReg(0);",
         },
         "__getRegFp": {"proto": "double __getRegFp(int);", "call": "__getRegFp(0);"},
+        # __getCallerReg only works with non-volatile (callee-saved) registers
+        # or dedicated architectural registers.
         "__getCallerReg": {
             "proto": "unsigned __int64 __getCallerReg(int);",
-            "call": "__getCallerReg(0);",
+            "call": "__getCallerReg(30);",
         },
+        # __getCallerRegFp only works with non-volatile (callee-saved) registers.
         "__getCallerRegFp": {
             "proto": "double __getCallerRegFp(int);",
-            "call": "__getCallerRegFp(0);",
+            "call": "__getCallerRegFp(8);",
         },
         "__hvc": {
             "proto": "unsigned int __hvc(unsigned int, ...);",
             "call": "__hvc(0);",
         },
         "__hlt": {"proto": "int __hlt(unsigned int, ...);", "call": "__hlt(0);"},
-        # x18 Manipulation
         "__incx18byte": {
             "proto": "void __incx18byte(unsigned long);",
             "call": "__incx18byte(0);",
@@ -614,7 +160,6 @@ VSCODE_BUILTINS = {
             "proto": "void __incx18qword(unsigned long);",
             "call": "__incx18qword(0);",
         },
-        # ISO Volatile
         "__iso_volatile_load8": {
             "proto": "__int8 __iso_volatile_load8(const volatile __int8 *);",
             "call": "__int8 tgt = 0; __iso_volatile_load8(&tgt);",
@@ -647,7 +192,6 @@ VSCODE_BUILTINS = {
             "proto": "void __iso_volatile_store64(volatile __int64 *, __int64);",
             "call": "__int64 tgt = 0; __iso_volatile_store64(&tgt, 0);",
         },
-        # LDAR / LDAPR
         "__ldar8": {
             "proto": "unsigned __int8 __ldar8(const unsigned __int8 volatile*);",
             "call": "unsigned __int8 tgt = 0; __ldar8(&tgt);",
@@ -664,28 +208,22 @@ VSCODE_BUILTINS = {
             "proto": "unsigned __int64 __ldar64(const unsigned __int64 volatile*);",
             "call": "unsigned __int64 tgt = 0; __ldar64(&tgt);",
         },
-        # Not provided in official documentation
-        # "__load_acquire8" : {"proto" : "unsigned __int8 __load_acquire8(const volatile unsigned __int8 *);", "call": "unsigned __uint8 tgt = 0; __load_acquire8(&tgt);"},
-        # "__load_acquire16" : {"proto" : "unsigned __int16 __load_acquire16(const volatile unsigned __int16 *);", "call": "unsigned __uint16 tgt = 0; __load_acquire16(&tgt);"},
-        # "__load_acquire32" : {"proto" : "unsigned __int32 __load_acquire32(const volatile unsigned __int32 *);", "call": "unsigned __uint32 tgt = 0; __load_acquire32(&tgt);"},
-        # "__load_acquire64" : {"proto" : "unsigned __int64 __load_acquire64(const volatile unsigned __int64 *);", "call": "unsigned __uint64 tgt = 0; __load_acquire64(&tgt);"},
         "__ldapr8": {
-            "proto": "unsigned __int8 __ldapr8(const unsigned __int8 volatile*);",
+            "proto": "unsigned __int8 __ldapr8(unsigned __int8 volatile*);",
             "call": "unsigned __int8 tgt = 0; __ldapr8(&tgt);",
         },
         "__ldapr16": {
-            "proto": "unsigned __int16 __ldapr16(const unsigned __int16 volatile*);",
+            "proto": "unsigned __int16 __ldapr16(unsigned __int16 volatile*);",
             "call": "unsigned __int16 tgt = 0; __ldapr16(&tgt);",
         },
         "__ldapr32": {
-            "proto": "unsigned __int32 __ldapr32(const unsigned __int32 volatile*);",
+            "proto": "unsigned __int32 __ldapr32(unsigned __int32 volatile*);",
             "call": "unsigned __int32 tgt = 0; __ldapr32(&tgt);",
         },
         "__ldapr64": {
-            "proto": "unsigned __int64 __ldapr64(const unsigned __int64 volatile*);",
+            "proto": "unsigned __int64 __ldapr64(unsigned __int64 volatile*);",
             "call": "unsigned __int64 tgt = 0; __ldapr64(&tgt);",
         },
-        # Math & Prefetch
         "__mulh": {
             "proto": "__int64 __mulh(__int64, __int64);",
             "call": "__mulh(0, 0);",
@@ -699,10 +237,9 @@ VSCODE_BUILTINS = {
             "call": "int dummy = 0; __prefetch(&dummy);",
         },
         "__prefetch2": {
-            "proto": "void __cdecl __prefetch(const void *, uint8_t);",
-            "call": "int dummy = 0; __prefetch(&dummy, 0);",
+            "proto": "void __cdecl __prefetch2(const void *, uint8_t);",
+            "call": "int dummy = 0; __prefetch2(&dummy, 0);",
         },
-        # More x18 Accessors
         "__readx18byte": {
             "proto": "unsigned char __readx18byte(unsigned long);",
             "call": "__readx18byte(0);",
@@ -735,7 +272,6 @@ VSCODE_BUILTINS = {
             "proto": "void __writex18qword(unsigned long, unsigned __int64);",
             "call": "__writex18qword(0, 0);",
         },
-        # Setters and Execution State
         "__setReg": {
             "proto": "void __setReg(int, unsigned __int64);",
             "call": "__setReg(0, 0);",
@@ -746,11 +282,11 @@ VSCODE_BUILTINS = {
         },
         "__setCallerReg": {
             "proto": "void __setCallerReg(int, unsigned __int64);",
-            "call": "__setCallerReg(0, 0);",
+            "call": "__setCallerReg(19, 0);",
         },
         "__setCallerRegFp": {
             "proto": "void __setCallerRegFp(int, double);",
-            "call": "__setCallerRegFp(0, 0.0);",
+            "call": "__setCallerRegFp(8, 0.0);",
         },
         "__sev": {"proto": "void __sev(void);", "call": "__sev();"},
         "__wfe": {"proto": "void __wfe(void);", "call": "__wfe();"},
@@ -764,7 +300,6 @@ VSCODE_BUILTINS = {
             "proto": "void __static_assert(int, const char *);",
             "call": '__static_assert(1, "test");',
         },
-        # STLR
         "__stlr8": {
             "proto": "void __stlr8(unsigned __int8 volatile*, unsigned __int8);",
             "call": "unsigned __int8 tgt = 0; __stlr8(&tgt, 0);",
@@ -781,7 +316,6 @@ VSCODE_BUILTINS = {
             "proto": "void __stlr64(unsigned __int64 volatile*, unsigned __int64);",
             "call": "unsigned __int64 tgt = 0; __stlr64(&tgt, 0);",
         },
-        # SWP
         "__swp8": {
             "proto": "unsigned __int8 __swp8(unsigned __int8 volatile*, unsigned __int8);",
             "call": "unsigned __int8 tgt = 0; __swp8(&tgt, 0);",
@@ -846,7 +380,6 @@ VSCODE_BUILTINS = {
             "proto": "unsigned __int64 __swpal64(unsigned __int64 volatile*, unsigned __int64);",
             "call": "unsigned __int64 tgt = 0; __swpal64(&tgt, 0);",
         },
-        # Type Casting and Utility
         "_CopyDoubleFromInt64": {
             "proto": "double _CopyDoubleFromInt64(__int64);",
             "call": "_CopyDoubleFromInt64(0);",
@@ -863,7 +396,6 @@ VSCODE_BUILTINS = {
             "proto": "__int64 _CopyInt64FromDouble(double);",
             "call": "_CopyInt64FromDouble(0.0);",
         },
-        # Counting Bits
         "_CountLeadingOnes": {
             "proto": "unsigned int _CountLeadingOnes(unsigned long);",
             "call": "_CountLeadingOnes(0);",
@@ -904,7 +436,6 @@ VSCODE_BUILTINS = {
             "proto": "unsigned int _CountOneBits64(unsigned __int64);",
             "call": "_CountOneBits64(0);",
         },
-        # Status Registers
         "_ReadStatusReg": {
             "proto": "__int64 _ReadStatusReg(int);",
             "call": "_ReadStatusReg(0);",
@@ -1763,9 +1294,10 @@ VSCODE_BUILTINS = {
 VSCODE_BUILTINS_DEFAULT = "2026"
 
 
-def check_builtin(clang_bin, func_name, config):
+def check_builtin(compiler_bin, func_name, config, target_arch):
     """
     Creates a temporary C file, compiles it, and checks if it links correctly.
+    Handles both Clang and MSVC (cl.exe).
     """
     c_code = f"""
     #include <stdint.h>
@@ -1785,45 +1317,54 @@ def check_builtin(clang_bin, func_name, config):
         tmp_c_name = tmp_c.name
 
     tmp_exe_name = tmp_c_name[:-2] + ".exe"
+    tmp_obj_name = tmp_c_name[:-2] + ".obj"
 
-    cmd = [
-        clang_bin,
-        "--target=aarch64-pc-windows-msvc",
-        tmp_c_name,
-        "-o",
-        tmp_exe_name,
-    ]
+    # Check if the user passed 'cl' or 'cl.exe'
+    compiler_base = os.path.basename(compiler_bin).lower()
+    is_msvc = compiler_base in ["cl", "cl.exe"]
+
+    cmd = [compiler_bin]
+
+    if is_msvc:
+        # MSVC relies on the environment for the target architecture
+        cmd.extend(["/nologo", tmp_c_name, f"/Fe{tmp_exe_name}", f"/Fo{tmp_obj_name}"])
+    else:
+        # Clang requires explicit target definition
+        clang_target = f"{target_arch}-pc-windows-msvc"
+        cmd.extend([f"--target={clang_target}", tmp_c_name, "-o", tmp_exe_name])
 
     try:
         result = subprocess.run(
             cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
         )
         is_success = result.returncode == 0
-        return is_success, result.stderr
-    finally:
-        if os.path.exists(tmp_c_name):
-            os.remove(tmp_c_name)
-        if os.path.exists(tmp_exe_name):
-            try:
-                os.remove(tmp_exe_name)
-            except OSError:
-                pass
 
-        lib_name = tmp_c_name[:-2] + ".lib"
-        exp_name = tmp_c_name[:-2] + ".exp"
-        if os.path.exists(lib_name):
-            os.remove(lib_name)
-        if os.path.exists(exp_name):
-            os.remove(exp_name)
+        # MSVC often prints errors to stdout instead of stderr depending on the phase
+        error_output = (
+            result.stdout + "\n" + result.stderr if is_msvc else result.stderr
+        )
+        return is_success, error_output
+    finally:
+        # Clean up all possible temporary files
+        files_to_remove = [
+            tmp_c_name,
+            tmp_exe_name,
+            tmp_obj_name,
+            tmp_c_name[:-2] + ".lib",
+            tmp_c_name[:-2] + ".exp",
+        ]
+
+        for file_path in files_to_remove:
+            if os.path.exists(file_path):
+                try:
+                    os.remove(file_path)
+                except OSError:
+                    pass
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Check Clang builtin support for Windows on ARM."
-    )
-    parser.add_argument(
-        "clang_bin",
-        help="Path to the clang binary (e.g., clang or C:\\path\\to\\clang.exe)",
+        description="Check compiler builtin support for Windows/Clang parity."
     )
     parser.add_argument(
         "--verbose",
@@ -1848,6 +1389,18 @@ def main():
         nargs="+",
         help="Specific built-ins to check (e.g., -b __dmb __isb). If omitted, checks all.",
     )
+    parser.add_argument(
+        "--compiler",
+        type=str,
+        required=True,
+        help="Path to the compiler binary (e.g., clang or C:\\path\\to\\clang.exe)",
+    )
+    parser.add_argument(
+        "--arch",
+        choices=["aarch64", "x86_64"],
+        default="aarch64",
+        help="Target architecture (default: aarch64)",
+    )
     args = parser.parse_args()
 
     set_builtins = VSCODE_BUILTINS[args.set]
@@ -1858,11 +1411,19 @@ def main():
     else:
         target_builtins = set_builtins.keys()
 
-    print(f"Using clang binary: {args.clang_bin} | targetting Vscode: {args.set}")
+    # Notify user regarding MSVC environment expectation
+    if os.path.basename(args.compiler).lower() in ["cl", "cl.exe"]:
+        print(
+            f"⚠️ Note: cl.exe uses the active shell environment. Ensure you ran vcvarsall.bat {args.arch}!"
+        )
+    else:
+        print(f"Target Architecture: {args.arch}")
+
+    print(f"Using compiler {args.compiler} | targetting Vscode: {args.set}")
     if args.only_results:
         print(f"{'Status':<15}")
     else:
-        print(f"{'Built-in':<40} | {'Status':<15}")
+        print(f"{'Built-in':<35} | {'Status':<15}")
     print("-" * 48)
 
     supported_count = 0
@@ -1870,12 +1431,14 @@ def main():
 
     for func_name in target_builtins:
         if func_name not in set_builtins:
-            print(f"{func_name:<30} | ⚠️ Not in dictionary")
+            print(f"{func_name:<35} | ⚠️ Not in dictionary")
             continue
 
         total_count += 1
         config = set_builtins[func_name]
-        is_supported, stderr_output = check_builtin(args.clang_bin, func_name, config)
+        is_supported, stderr_output = check_builtin(
+            args.compiler, func_name, config, args.arch
+        )
 
         if is_supported:
             status = "✅ Supported"
@@ -1886,7 +1449,7 @@ def main():
         if args.only_results:
             print(f"{status:<15}")
         else:
-            print(f"{func_name:<40} {status:<15}")
+            print(f"{func_name:<35} {status:<15}")
 
         if not is_supported and args.verbose:
             print(f"\n--- Compiler Error for {func_name} ---")
@@ -1894,7 +1457,9 @@ def main():
             print("-" * 48 + "\n")
 
     print("-" * 48)
-    print(f"Summary: {supported_count}/{total_count} targeted built-ins supported.")
+    print(
+        f"Summary: {total_count - supported_count}/{total_count} targeted built-ins missing."
+    )
 
 
 if __name__ == "__main__":
