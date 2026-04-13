@@ -8,7 +8,7 @@
 #
 # And to check which builtins are missing from msvc_builtins dict:
 #
-#   parse_header.py --libclang C:\path\to\libclang.dll --compare-builtin-header <header> 
+#   parse_header.py --libclang C:\path\to\libclang.dll --compare-builtin-header <header>
 
 import argparse
 import json

@@ -1284,6 +1284,193 @@ MSVC_BUILTINS = {
             "call": "__int64 tgt = 0; _interlockedbittestandset64_rel(&tgt, 0);",
         },
     },
+    "arm64intr_extra": {
+        "__sb": {"proto": "void __sb ( void )", "call": "__sb();"},
+        "__ld64b": {
+            "proto": "void __ld64b ( const void * _addr , unsigned __int64 _value [ 8 ] )",
+            "call": "void* _addr = 0;\nunsigned long long _value[1] = {0};\n__ld64b(_addr, _value);",
+        },
+        "__st64b": {
+            "proto": "void __st64b ( void * _addr , unsigned __int64 _value [ 8 ] )",
+            "call": "void* _addr = 0;\nunsigned long long _value[1] = {0};\n__st64b(_addr, _value);",
+        },
+        "__st64bv": {
+            "proto": "unsigned __int64 __st64bv ( void * _addr , unsigned __int64 _value [ 8 ] )",
+            "call": "void* _addr = 0;\nunsigned long long _value[1] = {0};\n__st64bv(_addr, _value);",
+        },
+        "__st64bv0": {
+            "proto": "unsigned __int64 __st64bv0 ( void * _addr , unsigned __int64 _value [ 8 ] )",
+            "call": "void* _addr = 0;\nunsigned long long _value[1] = {0};\n__st64bv0(_addr, _value);",
+        },
+        "__arm_ld64b": {
+            "proto": "static __forceinline data512_t __arm_ld64b ( const void * _addr )",
+            "call": "void* _addr = 0;\n__arm_ld64b(_addr);",
+        },
+        "__arm_st64b": {
+            "proto": "static __forceinline void __arm_st64b ( void * _addr , data512_t _value )",
+            "call": "void* _addr = 0;\ndata512_t _value = 0;\n__arm_st64b(_addr, _value);",
+        },
+        "__arm_st64bv": {
+            "proto": "static __forceinline unsigned __int64 __arm_st64bv ( void * _addr , data512_t _value )",
+            "call": "void* _addr = 0;\ndata512_t _value = 0;\n__arm_st64bv(_addr, _value);",
+        },
+        "__arm_st64bv0": {
+            "proto": "static __forceinline unsigned __int64 __arm_st64bv0 ( void * _addr , data512_t _value )",
+            "call": "void* _addr = 0;\ndata512_t _value = 0;\n__arm_st64bv0(_addr, _value);",
+        },
+        "__load_acquire8": {
+            "proto": "unsigned __int8 __load_acquire8 ( const volatile unsigned __int8 * _Target )",
+            "call": "unsigned char _Target = 0;\n__load_acquire8(&_Target);",
+        },
+        "__load_acquire16": {
+            "proto": "unsigned __int16 __load_acquire16 ( const volatile unsigned __int16 * _Target )",
+            "call": "unsigned short _Target = 0;\n__load_acquire16(&_Target);",
+        },
+        "__load_acquire32": {
+            "proto": "unsigned __int32 __load_acquire32 ( const volatile unsigned __int32 * _Target )",
+            "call": "unsigned int _Target = 0;\n__load_acquire32(&_Target);",
+        },
+        "__load_acquire64": {
+            "proto": "unsigned __int64 __load_acquire64 ( const volatile unsigned __int64 * _Target )",
+            "call": "unsigned long long _Target = 0;\n__load_acquire64(&_Target);",
+        },
+        "__ldxr8": {
+            "proto": "unsigned __int8 __ldxr8 ( const volatile unsigned __int8 * _Target )",
+            "call": "unsigned char _Target = 0;\n__ldxr8(&_Target);",
+        },
+        "__ldxr16": {
+            "proto": "unsigned __int16 __ldxr16 ( const volatile unsigned __int16 * _Target )",
+            "call": "unsigned short _Target = 0;\n__ldxr16(&_Target);",
+        },
+        "__ldxr32": {
+            "proto": "unsigned __int32 __ldxr32 ( const volatile unsigned __int32 * _Target )",
+            "call": "unsigned int _Target = 0;\n__ldxr32(&_Target);",
+        },
+        "__ldxr64": {
+            "proto": "unsigned __int64 __ldxr64 ( const volatile unsigned __int64 * _Target )",
+            "call": "unsigned long long _Target = 0;\n__ldxr64(&_Target);",
+        },
+        "__ldaxr8": {
+            "proto": "unsigned __int8 __ldaxr8 ( const volatile unsigned __int8 * _Target )",
+            "call": "unsigned char _Target = 0;\n__ldaxr8(&_Target);",
+        },
+        "__ldaxr16": {
+            "proto": "unsigned __int16 __ldaxr16 ( const volatile unsigned __int16 * _Target )",
+            "call": "unsigned short _Target = 0;\n__ldaxr16(&_Target);",
+        },
+        "__ldaxr32": {
+            "proto": "unsigned __int32 __ldaxr32 ( const volatile unsigned __int32 * _Target )",
+            "call": "unsigned int _Target = 0;\n__ldaxr32(&_Target);",
+        },
+        "__ldaxr64": {
+            "proto": "unsigned __int64 __ldaxr64 ( const volatile unsigned __int64 * _Target )",
+            "call": "unsigned long long _Target = 0;\n__ldaxr64(&_Target);",
+        },
+        "__stxr8": {
+            "proto": "unsigned __int8 __stxr8 ( volatile unsigned __int8 * _Target , unsigned __int8 _Value )",
+            "call": "unsigned char _Target = 0;\nunsigned char _Value = 0;\n__stxr8(&_Target, _Value);",
+        },
+        "__stxr16": {
+            "proto": "unsigned __int8 __stxr16 ( volatile unsigned __int16 * _Target , unsigned __int16 _Value )",
+            "call": "unsigned short _Target = 0;\nunsigned short _Value = 0;\n__stxr16(&_Target, _Value);",
+        },
+        "__stxr32": {
+            "proto": "unsigned __int8 __stxr32 ( volatile unsigned __int32 * _Target , unsigned __int32 _Value )",
+            "call": "unsigned int _Target = 0;\nunsigned int _Value = 0;\n__stxr32(&_Target, _Value);",
+        },
+        "__stxr64": {
+            "proto": "unsigned __int8 __stxr64 ( volatile unsigned __int64 * _Target , unsigned __int64 _Value )",
+            "call": "unsigned long long _Target = 0;\nunsigned long long _Value = 0;\n__stxr64(&_Target, _Value);",
+        },
+        "__stlxr8": {
+            "proto": "unsigned __int8 __stlxr8 ( volatile unsigned __int8 * _Target , unsigned __int8 _Value )",
+            "call": "unsigned char _Target = 0;\nunsigned char _Value = 0;\n__stlxr8(&_Target, _Value);",
+        },
+        "__stlxr16": {
+            "proto": "unsigned __int8 __stlxr16 ( volatile unsigned __int16 * _Target , unsigned __int16 _Value )",
+            "call": "unsigned short _Target = 0;\nunsigned short _Value = 0;\n__stlxr16(&_Target, _Value);",
+        },
+        "__stlxr32": {
+            "proto": "unsigned __int8 __stlxr32 ( volatile unsigned __int32 * _Target , unsigned __int32 _Value )",
+            "call": "unsigned int _Target = 0;\nunsigned int _Value = 0;\n__stlxr32(&_Target, _Value);",
+        },
+        "__stlxr64": {
+            "proto": "unsigned __int8 __stlxr64 ( volatile unsigned __int64 * _Target , unsigned __int64 _Value )",
+            "call": "unsigned long long _Target = 0;\nunsigned long long _Value = 0;\n__stlxr64(&_Target, _Value);",
+        },
+        "__clrex": {
+            "proto": "void __clrex ( unsigned __int8 crm )",
+            "call": "unsigned char crm = 0;\n__clrex(crm);",
+        },
+        "__ldtr8": {
+            "proto": "unsigned __int8 __ldtr8 ( const volatile unsigned __int8 * _Target )",
+            "call": "unsigned char _Target = 0;\n__ldtr8(&_Target);",
+        },
+        "__ldtr16": {
+            "proto": "unsigned __int16 __ldtr16 ( const volatile unsigned __int16 * _Target )",
+            "call": "unsigned short _Target = 0;\n__ldtr16(&_Target);",
+        },
+        "__ldtr32": {
+            "proto": "unsigned __int32 __ldtr32 ( const volatile unsigned __int32 * _Target )",
+            "call": "unsigned int _Target = 0;\n__ldtr32(&_Target);",
+        },
+        "__ldtr64": {
+            "proto": "unsigned __int64 __ldtr64 ( const volatile unsigned __int64 * _Target )",
+            "call": "unsigned long long _Target = 0;\n__ldtr64(&_Target);",
+        },
+        "__ldtrs8": {
+            "proto": "signed __int8 __ldtrs8 ( const volatile __int8 * _Target )",
+            "call": "char _Target = 0;\n__ldtrs8(&_Target);",
+        },
+        "__ldtrs16": {
+            "proto": "signed __int16 __ldtrs16 ( const volatile __int16 * _Target )",
+            "call": "short _Target = 0;\n__ldtrs16(&_Target);",
+        },
+        "__ldtrs32": {
+            "proto": "signed __int32 __ldtrs32 ( const volatile __int32 * _Target )",
+            "call": "int _Target = 0;\n__ldtrs32(&_Target);",
+        },
+        "__sttr8": {
+            "proto": "void __sttr8 ( volatile unsigned __int8 * _Target , unsigned __int8 _Value )",
+            "call": "unsigned char _Target = 0;\nunsigned char _Value = 0;\n__sttr8(&_Target, _Value);",
+        },
+        "__sttr16": {
+            "proto": "void __sttr16 ( volatile unsigned __int16 * _Target , unsigned __int16 _Value )",
+            "call": "unsigned short _Target = 0;\nunsigned short _Value = 0;\n__sttr16(&_Target, _Value);",
+        },
+        "__sttr32": {
+            "proto": "void __sttr32 ( volatile unsigned __int32 * _Target , unsigned __int32 _Value )",
+            "call": "unsigned int _Target = 0;\nunsigned int _Value = 0;\n__sttr32(&_Target, _Value);",
+        },
+        "__sttr64": {
+            "proto": "void __sttr64 ( volatile unsigned __int64 * _Target , unsigned __int64 _Value )",
+            "call": "unsigned long long _Target = 0;\nunsigned long long _Value = 0;\n__sttr64(&_Target, _Value);",
+        },
+        "__xpaci": {
+            "proto": "void * __xpaci ( void * _Pointer )",
+            "call": "void* _Pointer = 0;\n__xpaci(_Pointer);",
+        },
+        "__rbit": {
+            "proto": "unsigned __int32 __rbit ( unsigned __int32 _Value )",
+            "call": "unsigned int _Value = 0;\n__rbit(_Value);",
+        },
+        "__rbitl": {
+            "proto": "unsigned long __rbitl ( unsigned long _Value )",
+            "call": "unsigned long _Value = 0;\n__rbitl(_Value);",
+        },
+        "__rbitll": {
+            "proto": "unsigned __int64 __rbitll ( unsigned __int64 _Value )",
+            "call": "unsigned long long _Value = 0;\n__rbitll(_Value);",
+        },
+        "__rndr": {
+            "proto": "int __rndr ( unsigned __int64 * _adr )",
+            "call": "unsigned long long _adr = 0;\n__rndr(&_adr);",
+        },
+        "__rndrrs": {
+            "proto": "int __rndrrs ( unsigned __int64 * _adr )",
+            "call": "unsigned long long _adr = 0;\n__rndrrs(&_adr);",
+        },
+    },
 }
 
 MSVC_BUILTINS_DEFAULT = "2026"
