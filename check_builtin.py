@@ -8,6 +8,7 @@ from msvc_builtins import MSVC_BUILTINS
 
 MSVC_BUILTINS_DEFAULT = "arm64"
 
+
 def check_builtin(compiler_bin, func_name, config, target_arch):
     """
     Creates a temporary C file, compiles it, and checks if it links correctly.

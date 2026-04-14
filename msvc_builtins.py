@@ -441,7 +441,7 @@ MSVC_BUILTINS = {
         },
     },
     # __iso_volatile_load/store intrinsics
-    "2026_iso_load_store": {
+    "iso_load_store": {
         "__iso_volatile_load8": {
             "proto": "__int8 __iso_volatile_load8(const volatile __int8 * Location);",
             "call": "__int8 tgt = 0; __iso_volatile_load8(&tgt);",
@@ -476,7 +476,7 @@ MSVC_BUILTINS = {
         },
     },
     # ARM64 support for intrinsics from other architectures
-    "2026_general": {
+    "general": {
         "__assume": {"proto": "void __assume(int);", "call": "__assume(1);"},
         "__code_seg": {
             "proto": "void __code_seg(const char *);",
@@ -620,7 +620,7 @@ MSVC_BUILTINS = {
         },
     },
     # 4. Atomic Interlocked builtins list
-    "2026_interlocked": {
+    "interlocked": {
         # Add (long)
         "_InterlockedAdd": {
             "proto": "long _InterlockedAdd(long volatile *, long);",
@@ -1217,8 +1217,250 @@ MSVC_BUILTINS = {
             "call": "__int64 tgt = 0; _InterlockedXor64_rel(&tgt, 0);",
         },
     },
+    "interlocked_more": {
+        "_InterlockedMax64_nf": {
+            "proto": "__int64 _InterlockedMax64_nf(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedMax64_nf(arg0, arg1);",
+        },
+        "_InterlockedUMin8_acq": {
+            "proto": "unsigned char _InterlockedUMin8_acq(unsigned char volatile *, unsigned char)",
+            "call": "unsigned char volatile * arg0; unsigned char arg1; unsigned char result = _InterlockedUMin8_acq(arg0, arg1);",
+        },
+        "_InterlockedMax16_nf": {
+            "proto": "short _InterlockedMax16_nf(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedMax16_nf(arg0, arg1);",
+        },
+        "_InterlockedMax_rel": {
+            "proto": "long _InterlockedMax_rel(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedMax_rel(arg0, arg1);",
+        },
+        "_InterlockedNand64_acq": {
+            "proto": "__int64 _InterlockedNand64_acq(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedNand64_acq(arg0, arg1);",
+        },
+        "_InterlockedUMax16_nf": {
+            "proto": "unsigned short _InterlockedUMax16_nf(unsigned short volatile *, unsigned short)",
+            "call": "unsigned short volatile * arg0; unsigned short arg1; unsigned short result = _InterlockedUMax16_nf(arg0, arg1);",
+        },
+        "_InterlockedMax_acq": {
+            "proto": "long _InterlockedMax_acq(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedMax_acq(arg0, arg1);",
+        },
+        "_InterlockedNand8_acq": {
+            "proto": "char _InterlockedNand8_acq(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedNand8_acq(arg0, arg1);",
+        },
+        "_InterlockedMax8_nf": {
+            "proto": "char _InterlockedMax8_nf(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedMax8_nf(arg0, arg1);",
+        },
+        "_InterlockedUMin16_nf": {
+            "proto": "unsigned short _InterlockedUMin16_nf(unsigned short volatile *, unsigned short)",
+            "call": "unsigned short volatile * arg0; unsigned short arg1; unsigned short result = _InterlockedUMin16_nf(arg0, arg1);",
+        },
+        "_InterlockedMin_nf": {
+            "proto": "long _InterlockedMin_nf(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedMin_nf(arg0, arg1);",
+        },
+        "_InterlockedMax_nf": {
+            "proto": "long _InterlockedMax_nf(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedMax_nf(arg0, arg1);",
+        },
+        "_InterlockedUMax8_nf": {
+            "proto": "unsigned char _InterlockedUMax8_nf(unsigned char volatile *, unsigned char)",
+            "call": "unsigned char volatile * arg0; unsigned char arg1; unsigned char result = _InterlockedUMax8_nf(arg0, arg1);",
+        },
+        "_InterlockedMin16_rel": {
+            "proto": "short _InterlockedMin16_rel(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedMin16_rel(arg0, arg1);",
+        },
+        "_InterlockedNand8_rel": {
+            "proto": "char _InterlockedNand8_rel(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedNand8_rel(arg0, arg1);",
+        },
+        "_InterlockedNand64_nf": {
+            "proto": "__int64 _InterlockedNand64_nf(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedNand64_nf(arg0, arg1);",
+        },
+        "_InterlockedNand16_rel": {
+            "proto": "short _InterlockedNand16_rel(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedNand16_rel(arg0, arg1);",
+        },
+        "_InterlockedUMin16_acq": {
+            "proto": "unsigned short _InterlockedUMin16_acq(unsigned short volatile *, unsigned short)",
+            "call": "unsigned short volatile * arg0; unsigned short arg1; unsigned short result = _InterlockedUMin16_acq(arg0, arg1);",
+        },
+        "_InterlockedNand16_nf": {
+            "proto": "short _InterlockedNand16_nf(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedNand16_nf(arg0, arg1);",
+        },
+        "_InterlockedUMax_rel": {
+            "proto": "unsigned long _InterlockedUMax_rel(unsigned long volatile *, unsigned long)",
+            "call": "unsigned long volatile * arg0; unsigned long arg1; unsigned long result = _InterlockedUMax_rel(arg0, arg1);",
+        },
+        "_InterlockedMax16_rel": {
+            "proto": "short _InterlockedMax16_rel(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedMax16_rel(arg0, arg1);",
+        },
+        "_InterlockedUMin64_acq": {
+            "proto": "unsigned __int64 _InterlockedUMin64_acq(unsigned __int64 volatile *, unsigned __int64)",
+            "call": "unsigned __int64 volatile * arg0; unsigned __int64 arg1; unsigned __int64 result = _InterlockedUMin64_acq(arg0, arg1);",
+        },
+        "_InterlockedUMax16_rel": {
+            "proto": "unsigned short _InterlockedUMax16_rel(unsigned short volatile *, unsigned short)",
+            "call": "unsigned short volatile * arg0; unsigned short arg1; unsigned short result = _InterlockedUMax16_rel(arg0, arg1);",
+        },
+        "_InterlockedNand8_nf": {
+            "proto": "char _InterlockedNand8_nf(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedNand8_nf(arg0, arg1);",
+        },
+        "_InterlockedUMax64_acq": {
+            "proto": "unsigned __int64 _InterlockedUMax64_acq(unsigned __int64 volatile *, unsigned __int64)",
+            "call": "unsigned __int64 volatile * arg0; unsigned __int64 arg1; unsigned __int64 result = _InterlockedUMax64_acq(arg0, arg1);",
+        },
+        "_InterlockedMin64_nf": {
+            "proto": "__int64 _InterlockedMin64_nf(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedMin64_nf(arg0, arg1);",
+        },
+        "_InterlockedUMin16_rel": {
+            "proto": "unsigned short _InterlockedUMin16_rel(unsigned short volatile *, unsigned short)",
+            "call": "unsigned short volatile * arg0; unsigned short arg1; unsigned short result = _InterlockedUMin16_rel(arg0, arg1);",
+        },
+        "_InterlockedUMax8_acq": {
+            "proto": "unsigned char _InterlockedUMax8_acq(unsigned char volatile *, unsigned char)",
+            "call": "unsigned char volatile * arg0; unsigned char arg1; unsigned char result = _InterlockedUMax8_acq(arg0, arg1);",
+        },
+        "_InterlockedNand_acq": {
+            "proto": "long _InterlockedNand_acq(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedNand_acq(arg0, arg1);",
+        },
+        "_InterlockedNand_rel": {
+            "proto": "long _InterlockedNand_rel(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedNand_rel(arg0, arg1);",
+        },
+        "_InterlockedMin64_acq": {
+            "proto": "__int64 _InterlockedMin64_acq(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedMin64_acq(arg0, arg1);",
+        },
+        "_InterlockedMax64_rel": {
+            "proto": "__int64 _InterlockedMax64_rel(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedMax64_rel(arg0, arg1);",
+        },
+        "_InterlockedMin16_acq": {
+            "proto": "short _InterlockedMin16_acq(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedMin16_acq(arg0, arg1);",
+        },
+        "_InterlockedMax8_rel": {
+            "proto": "char _InterlockedMax8_rel(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedMax8_rel(arg0, arg1);",
+        },
+        "_InterlockedMax64_acq": {
+            "proto": "__int64 _InterlockedMax64_acq(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedMax64_acq(arg0, arg1);",
+        },
+        "_InterlockedNand16_acq": {
+            "proto": "short _InterlockedNand16_acq(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedNand16_acq(arg0, arg1);",
+        },
+        "_InterlockedMin_rel": {
+            "proto": "long _InterlockedMin_rel(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedMin_rel(arg0, arg1);",
+        },
+        "_InterlockedMin_acq": {
+            "proto": "long _InterlockedMin_acq(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedMin_acq(arg0, arg1);",
+        },
+        "_InterlockedUMax8_rel": {
+            "proto": "unsigned char _InterlockedUMax8_rel(unsigned char volatile *, unsigned char)",
+            "call": "unsigned char volatile * arg0; unsigned char arg1; unsigned char result = _InterlockedUMax8_rel(arg0, arg1);",
+        },
+        "_InterlockedUMax16_acq": {
+            "proto": "unsigned short _InterlockedUMax16_acq(unsigned short volatile *, unsigned short)",
+            "call": "unsigned short volatile * arg0; unsigned short arg1; unsigned short result = _InterlockedUMax16_acq(arg0, arg1);",
+        },
+        "_InterlockedUMin_acq": {
+            "proto": "unsigned long _InterlockedUMin_acq(unsigned long volatile *, unsigned long)",
+            "call": "unsigned long volatile * arg0; unsigned long arg1; unsigned long result = _InterlockedUMin_acq(arg0, arg1);",
+        },
+        "_InterlockedNand64_rel": {
+            "proto": "__int64 _InterlockedNand64_rel(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedNand64_rel(arg0, arg1);",
+        },
+        "_InterlockedUMin64_rel": {
+            "proto": "unsigned __int64 _InterlockedUMin64_rel(unsigned __int64 volatile *, unsigned __int64)",
+            "call": "unsigned __int64 volatile * arg0; unsigned __int64 arg1; unsigned __int64 result = _InterlockedUMin64_rel(arg0, arg1);",
+        },
+        "_InterlockedMax8_acq": {
+            "proto": "char _InterlockedMax8_acq(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedMax8_acq(arg0, arg1);",
+        },
+        "_InterlockedUMin_rel": {
+            "proto": "unsigned long _InterlockedUMin_rel(unsigned long volatile *, unsigned long)",
+            "call": "unsigned long volatile * arg0; unsigned long arg1; unsigned long result = _InterlockedUMin_rel(arg0, arg1);",
+        },
+        "_InterlockedUMax_acq": {
+            "proto": "unsigned long _InterlockedUMax_acq(unsigned long volatile *, unsigned long)",
+            "call": "unsigned long volatile * arg0; unsigned long arg1; unsigned long result = _InterlockedUMax_acq(arg0, arg1);",
+        },
+        "_InterlockedMin8_rel": {
+            "proto": "char _InterlockedMin8_rel(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedMin8_rel(arg0, arg1);",
+        },
+        "_InterlockedMin8_acq": {
+            "proto": "char _InterlockedMin8_acq(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedMin8_acq(arg0, arg1);",
+        },
+        "_InterlockedUMin64_nf": {
+            "proto": "unsigned __int64 _InterlockedUMin64_nf(unsigned __int64 volatile *, unsigned __int64)",
+            "call": "unsigned __int64 volatile * arg0; unsigned __int64 arg1; unsigned __int64 result = _InterlockedUMin64_nf(arg0, arg1);",
+        },
+        "_InterlockedUMax64_rel": {
+            "proto": "unsigned __int64 _InterlockedUMax64_rel(unsigned __int64 volatile *, unsigned __int64)",
+            "call": "unsigned __int64 volatile * arg0; unsigned __int64 arg1; unsigned __int64 result = _InterlockedUMax64_rel(arg0, arg1);",
+        },
+        "_InterlockedMin16_nf": {
+            "proto": "short _InterlockedMin16_nf(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedMin16_nf(arg0, arg1);",
+        },
+        "_InterlockedUMax_nf": {
+            "proto": "unsigned long _InterlockedUMax_nf(unsigned long volatile *, unsigned long)",
+            "call": "unsigned long volatile * arg0; unsigned long arg1; unsigned long result = _InterlockedUMax_nf(arg0, arg1);",
+        },
+        "_InterlockedNand_nf": {
+            "proto": "long _InterlockedNand_nf(long volatile *, long)",
+            "call": "long volatile * arg0; long arg1; long result = _InterlockedNand_nf(arg0, arg1);",
+        },
+        "_InterlockedUMin_nf": {
+            "proto": "unsigned long _InterlockedUMin_nf(unsigned long volatile *, unsigned long)",
+            "call": "unsigned long volatile * arg0; unsigned long arg1; unsigned long result = _InterlockedUMin_nf(arg0, arg1);",
+        },
+        "_InterlockedMax16_acq": {
+            "proto": "short _InterlockedMax16_acq(short volatile *, short)",
+            "call": "short volatile * arg0; short arg1; short result = _InterlockedMax16_acq(arg0, arg1);",
+        },
+        "_InterlockedUMin8_rel": {
+            "proto": "unsigned char _InterlockedUMin8_rel(unsigned char volatile *, unsigned char)",
+            "call": "unsigned char volatile * arg0; unsigned char arg1; unsigned char result = _InterlockedUMin8_rel(arg0, arg1);",
+        },
+        "_InterlockedMin64_rel": {
+            "proto": "__int64 _InterlockedMin64_rel(__int64 volatile *, __int64)",
+            "call": "__int64 volatile * arg0; __int64 arg1; __int64 result = _InterlockedMin64_rel(arg0, arg1);",
+        },
+        "_InterlockedUMax64_nf": {
+            "proto": "unsigned __int64 _InterlockedUMax64_nf(unsigned __int64 volatile *, unsigned __int64)",
+            "call": "unsigned __int64 volatile * arg0; unsigned __int64 arg1; unsigned __int64 result = _InterlockedUMax64_nf(arg0, arg1);",
+        },
+        "_InterlockedMin8_nf": {
+            "proto": "char _InterlockedMin8_nf(char volatile *, char)",
+            "call": "char volatile * arg0; char arg1; char result = _InterlockedMin8_nf(arg0, arg1);",
+        },
+        "_InterlockedUMin8_nf": {
+            "proto": "unsigned char _InterlockedUMin8_nf(unsigned char volatile *, unsigned char)",
+            "call": "unsigned char volatile * arg0; unsigned char arg1; unsigned char result = _InterlockedUMin8_nf(arg0, arg1);",
+        },
+    },
     # BitTest Interlocked builtins list
-    "2026_bittest": {
+    "bittest": {
         "_interlockedbittestandreset": {
             "proto": "unsigned char _interlockedbittestandreset(long volatile *, long);",
             "call": "long tgt = 0; _interlockedbittestandreset(&tgt, 0);",
