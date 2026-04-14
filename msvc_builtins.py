@@ -1,7 +1,7 @@
 # As defined by https://learn.microsoft.com/en-us/cpp/intrinsics/arm64-intrinsics?view=msvc-180
 MSVC_BUILTINS = {
     # ARM64-specific intrinsics listing
-    "2026": {
+    "arm64": {
         "__break": {"proto": "void __break(int);", "call": "__break(0);"},
         "__addx18byte": {
             "proto": "void __addx18byte(unsigned long, unsigned char);",
@@ -1472,5 +1472,3 @@ MSVC_BUILTINS = {
         },
     },
 }
-
-MSVC_BUILTINS_DEFAULT = "2026"

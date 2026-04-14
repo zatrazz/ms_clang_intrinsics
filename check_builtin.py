@@ -4,8 +4,9 @@ import tempfile
 import os
 import argparse
 
-from msvc_builtins import MSVC_BUILTINS, MSVC_BUILTINS_DEFAULT
+from msvc_builtins import MSVC_BUILTINS
 
+MSVC_BUILTINS_DEFAULT = "arm64"
 
 def check_builtin(compiler_bin, func_name, config, target_arch):
     """
@@ -14,9 +15,8 @@ def check_builtin(compiler_bin, func_name, config, target_arch):
     """
     c_code = f"""
     #include <stdint.h>
-    
-    {config["proto"]}
-    
+    #include <intrin.h>
+
     int main(void) {{
         {config["call"]}
         return 0;
