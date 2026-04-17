@@ -15,7 +15,6 @@ def check_builtin(compiler_bin, func_name, config, target_arch):
     Handles both Clang and MSVC (cl.exe).
     """
     c_code = f"""
-    #include <stdint.h>
     #include <intrin.h>
 
     int main(void) {{
@@ -46,6 +45,9 @@ def check_builtin(compiler_bin, func_name, config, target_arch):
         # Clang requires explicit target definition
         clang_target = f"{target_arch}-pc-windows-msvc"
         cmd.extend([f"--target={clang_target}", tmp_c_name, "-o", tmp_exe_name])
+        arch = config.get("arch")
+        if arch:
+            cmd.extend([f"-march=armv8-a{arch}"])
 
     try:
         result = subprocess.run(
@@ -85,6 +87,12 @@ def main():
         "-v",
         action="store_true",
         help="Print compiler errors for unsupported builtins",
+    )
+    parser.add_argument(
+        "--only-name", "-n", action="store_true", help="Print only the results"
+    )
+    parser.add_argument(
+        "--only-proto", "-p", action="store_true", help="Print only the results"
     )
     parser.add_argument(
         "--only-results", "-r", action="store_true", help="Print only the results"
@@ -160,7 +168,11 @@ def main():
         else:
             status = "❌ Missing"
 
-        if args.only_results:
+        if args.only_name:
+            print(f"{func_name:<15}")
+        elif args.only_proto:
+            print(f"{set_builtins[func_name]['proto']:<15}")
+        elif args.only_results:
             print(f"{status:<15}")
         else:
             print(f"{func_name:<35} {status:<15}")

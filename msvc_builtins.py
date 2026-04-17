@@ -86,34 +86,42 @@ MSVC_BUILTINS = {
         "__crc32b": {
             "proto": "unsigned __int32 __crc32b(unsigned __int32, unsigned __int32);",
             "call": "__crc32b(0, 0);",
+            "arch": "+crc",
         },
         "__crc32h": {
             "proto": "unsigned __int32 __crc32h(unsigned __int32, unsigned __int32);",
             "call": "__crc32h(0, 0);",
+            "arch": "+crc",
         },
         "__crc32w": {
             "proto": "unsigned __int32 __crc32w(unsigned __int32, unsigned __int32);",
             "call": "__crc32w(0, 0);",
+            "arch": "+crc",
         },
         "__crc32d": {
             "proto": "unsigned __int32 __crc32d(unsigned __int32, unsigned __int64);",
             "call": "__crc32d(0, 0);",
+            "arch": "+crc",
         },
         "__crc32cb": {
             "proto": "unsigned __int32 __crc32cb(unsigned __int32, unsigned __int32);",
             "call": "__crc32cb(0, 0);",
+            "arch": "+crc",
         },
         "__crc32ch": {
             "proto": "unsigned __int32 __crc32ch(unsigned __int32, unsigned __int32);",
             "call": "__crc32ch(0, 0);",
+            "arch": "+crc",
         },
         "__crc32cw": {
             "proto": "unsigned __int32 __crc32cw(unsigned __int32, unsigned __int32);",
             "call": "__crc32cw(0, 0);",
+            "arch": "+crc",
         },
         "__crc32cd": {
             "proto": "unsigned __int32 __crc32cd(unsigned __int32, unsigned __int64);",
             "call": "__crc32cd(0, 0);",
+            "arch": "+crc",
         },
         "__dmb": {"proto": "void __dmb(unsigned int);", "call": "__dmb(0);"},
         "__dsb": {"proto": "void __dsb(unsigned int);", "call": "__dsb(0);"},
