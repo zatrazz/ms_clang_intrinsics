@@ -441,11 +441,11 @@ MSVC_BUILTINS = {
         },
         "_ReadStatusReg": {
             "proto": "__int64 _ReadStatusReg(int);",
-            "call": "_ReadStatusReg(0);",
+            "call": "_ReadStatusReg(16384);",
         },
         "_WriteStatusReg": {
             "proto": "void _WriteStatusReg(int, __int64);",
-            "call": "_WriteStatusReg(0, 0);",
+            "call": "_WriteStatusReg(16384, 0);",
         },
     },
     # __iso_volatile_load/store intrinsics
@@ -1555,18 +1555,22 @@ MSVC_BUILTINS = {
         "__arm_ld64b": {
             "proto": "static __forceinline data512_t __arm_ld64b ( const void * _addr )",
             "call": "void* _addr = 0;\n__arm_ld64b(_addr);",
+            "arch": "+ls64",
         },
         "__arm_st64b": {
             "proto": "static __forceinline void __arm_st64b ( void * _addr , data512_t _value )",
-            "call": "void* _addr = 0;\ndata512_t _value = 0;\n__arm_st64b(_addr, _value);",
+            "call": "void* _addr = 0;\ndata512_t _value = { 0 };\n__arm_st64b(_addr, _value);",
+            "arch": "+ls64",
         },
         "__arm_st64bv": {
             "proto": "static __forceinline unsigned __int64 __arm_st64bv ( void * _addr , data512_t _value )",
-            "call": "void* _addr = 0;\ndata512_t _value = 0;\n__arm_st64bv(_addr, _value);",
+            "call": "void* _addr = 0;\ndata512_t _value = { 0 };\n__arm_st64bv(_addr, _value);",
+            "arch": "+ls64",
         },
         "__arm_st64bv0": {
             "proto": "static __forceinline unsigned __int64 __arm_st64bv0 ( void * _addr , data512_t _value )",
-            "call": "void* _addr = 0;\ndata512_t _value = 0;\n__arm_st64bv0(_addr, _value);",
+            "call": "void* _addr = 0;\ndata512_t _value = { 0 };\n__arm_st64bv0(_addr, _value);",
+            "arch": "+ls64",
         },
         "__load_acquire8": {
             "proto": "unsigned __int8 __load_acquire8 ( const volatile unsigned __int8 * _Target )",
