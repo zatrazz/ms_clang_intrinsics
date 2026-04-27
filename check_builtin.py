@@ -47,7 +47,10 @@ def check_builtin(compiler_bin, func_name, config, target_arch):
         cmd.extend([f"--target={clang_target}", tmp_c_name, "-o", tmp_exe_name])
         arch = config.get("arch")
         if arch:
-            cmd.extend([f"-march=armv8-a{arch}"])
+            if arch.startswith('-'):
+                cmd.extend([f"-march=armv8-a{arch}"])
+            else:
+                cmd.extend([f"-march={arch}"])
 
     try:
         result = subprocess.run(

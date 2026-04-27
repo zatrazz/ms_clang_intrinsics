@@ -1534,7 +1534,7 @@ MSVC_BUILTINS = {
             "call": "__int64 tgt = 0; _interlockedbittestandset64_rel(&tgt, 0);",
         },
     },
-    "arm64intr_extra": {
+    "arm64_extra": {
         "__sb": {"proto": "void __sb ( void )", "call": "__sb();"},
         "__ld64b": {
             "proto": "void __ld64b ( const void * _addr , unsigned __int64 _value [ 8 ] )",
@@ -1719,10 +1719,12 @@ MSVC_BUILTINS = {
         "__rndr": {
             "proto": "int __rndr ( unsigned __int64 * _adr )",
             "call": "unsigned long long _adr = 0;\n__rndr(&_adr);",
+            "arch": "armv8.5-a+rng",
         },
         "__rndrrs": {
             "proto": "int __rndrrs ( unsigned __int64 * _adr )",
             "call": "unsigned long long _adr = 0;\n__rndrrs(&_adr);",
+            "arch": "armv8.5-a+rng",
         },
     },
 }
